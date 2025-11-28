@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGROTEC - App Agrícola Inteligente</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveGrid 20s linear infinite;
+        }
+
+        @keyframes moveGrid {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 1;
+            padding: 2rem;
+            max-width: 1200px;
+        }
+
+        .logo {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: #4CAF50;
+            color: white;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #45a049;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(76, 175, 80, 0.6);
+        }
+
+        .gallery {
+            padding: 5rem 2rem;
+            background: white;
+        }
+
+        .gallery h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1a4d2e;
+        }
+
+        .gallery p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .screenshots {
+            display: flex;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+            padding: 2rem 1rem;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screenshot-item {
+            min-width: 280px;
+            flex: 1;
+            background: #f5f5f5;
+            border-radius: 30px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            scroll-snap-align: center;
+            text-align: center;
+        }
+
+        .screenshot-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .screenshot-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, #2d6a4f 0%, #1a4d2e 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .screenshot-item h3 {
+            color: #1a4d2e;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .screenshot-item p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .features {
+            padding: 5rem 2rem;
+            background: #f5f5f5;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1a4d2e;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #1a4d2e;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .feature-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .feature-card.active .feature-details {
+            max-height: 500px;
+        }
+
+        .feature-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-details li {
+            padding: 0.5rem 0;
+            color: #555;
+        }
+
+        .feature-details li::before {
+            content: "✓ ";
+            color: #4CAF50;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .download-section {
+            background: linear-gradient(135deg, #2d6a4f 0%, #1a4d2e 100%);
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .download-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .download-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .download-button {
+            background: white;
+            color: #1a4d2e;
+            padding: 1.2rem 3rem;
+            font-size: 1.3rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        .download-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .app-version {
+            margin-top: 1rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #1a4d2e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #a8dadc;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .footer-link:hover {
+            color: #4CAF50;
+            transform: translateY(-2px);
+        }
+
+        .separator {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .slogan {
+                font-size: 1.2rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots {
+                padding: 1rem 0.5rem;
+            }
+
+            .screenshot-item {
+                min-width: 250px;
+            }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator::before {
+            content: '↓';
+            font-size: 2rem;
+            color: white;
+            opacity: 0.7;
+        }
+
+        .upload-notice {
+            background: #fff3cd;
+            border: 2px dashed #ffc107;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: center;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="logo">
+                <img src="ic_agrotec_logo.png" alt="AGROTEC Logo">
+            </div>
+            <h1>AGROTEC</h1>
+            <p class="slogan">Un puente entre el conocimiento técnico y experiencia del agricultor con la tecnología</p>
+            <a href="#download" class="cta-button">Descargar Ahora</a>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>Conoce la Interfaz</h2>
+        <p>Descubre cómo AGROTEC facilita el trabajo agrícola</p>
+        
+        <div class="upload-notice">
+            📸 <strong>Nota:</strong> Guarda tus capturas de pantalla como: <code>screenshot1.png</code>, <code>screenshot2.png</code>, etc. en la misma carpeta
+        </div>
+
+        <div class="screenshots">
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <img src="inicio.jpg" alt="Pantalla Principal" style="width:100%; height:100%; object-fit:contain; border-radius:15px;" onerror="this.parentElement.innerHTML='🏠'">
+                </div>
+                <h3>Pantalla Principal</h3>
+                <p>Interfaz limpia y fácil de navegar</p>
+            </div>
+
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <img src="diagnostico.jpg" alt="Diagnóstico" style="width:100%; height:100%; object-fit:contain; border-radius:15px;" onerror="this.parentElement.innerHTML='🌱'">
+                </div>
+                <h3>Diagnóstico</h3>
+                <p>Selecciona síntomas y obtén resultados</p>
+            </div>
+
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <img src="biblioteca.jpg" alt="Biblioteca Digital" style="width:100%; height:100%; object-fit:contain; border-radius:15px;" onerror="this.parentElement.innerHTML='📚'">
+                </div>
+                <h3>Biblioteca Digital</h3>
+                <p>Recursos completos al alcance</p>
+            </div>
+
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <img src="ia.jpg" alt="IA Investigación" style="width:100%; height:100%; object-fit:contain; border-radius:15px;" onerror="this.parentElement.innerHTML='🤖'">
+                </div>
+                <h3>IA Integrada</h3>
+                <p>ChatGPT y Gemini en un solo lugar</p>
+            </div>
+
+            <div class="screenshot-item">
+                <div class="screenshot-placeholder">
+                    <img src="notas.jpg" alt="Notas" style="width:100%; height:100%; object-fit:contain; border-radius:15px;" onerror="this.parentElement.innerHTML='📝'">
+                </div>
+                <h3>Notas y Fotos</h3>
+                <p>Documenta tu progreso</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <h2>Funcionalidades Inteligentes</h2>
+        <div class="features-grid">
+            <div class="feature-card" onclick="toggleDetails(this)">
+                <div class="feature-icon">🌱</div>
+                <h3>Diagnóstico</h3>
+                <p>Analiza plantas y cultivos de forma inteligente</p>
+                <div class="feature-details">
+                    <ul>
+                        <li>30 síntomas cargados desde base de datos</li>
+                        <li>Selecciona los síntomas que observas en tu planta</li>
+                        <li>Diagnóstico automático al presionar el botón</li>
+                        <li>Resultados precisos con recomendaciones personalizadas</li>
+                        <li>Soluciones prácticas para cada problema detectado</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="toggleDetails(this)">
+                <div class="feature-icon">📚</div>
+                <h3>Biblioteca Digital</h3>
+                <p>Recursos y documentación completa</p>
+                <div class="feature-details">
+                    <ul>
+                        <li>Catálogo de deficiencias nutricionales</li>
+                        <li>Información sobre toxicidades de nutrientes</li>
+                        <li>Síntomas detallados de cada problema</li>
+                        <li>Métodos de prevención y combate</li>
+                        <li>Guías visuales y explicativas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="toggleDetails(this)">
+                <div class="feature-icon">🤖</div>
+                <h3>Investigación IA</h3>
+                <p>ChatGPT y Gemini integrados</p>
+                <div class="feature-details">
+                    <ul>
+                        <li>Acceso directo a ChatGPT</li>
+                        <li>Integración con Gemini de Google</li>
+                        <li>Consultas agrícolas especializadas</li>
+                        <li>Respuestas instantáneas a tus dudas</li>
+                        <li>Investigación avanzada con IA</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="feature-card" onclick="toggleDetails(this)">
+                <div class="feature-icon">📝</div>
+                <h3>Apuntes y Notas</h3>
+                <p>Notas, Fotos y Recordatorios</p>
+                <div class="feature-details">
+                    <ul>
+                        <li>Crea notas de tus cultivos</li>
+                        <li>Toma fotos directamente en la app</li>
+                        <li>Documenta el progreso de tus plantas</li>
+                        <li>Organiza tu información agrícola</li>
+                        <li>Accede a tus registros en cualquier momento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download-section">
+        <h2>Descarga AGROTEC Ahora</h2>
+        <p>Disponible para Android - Instalación directa APK</p>
+        <a href="app-debug.apk" class="download-button" download="AGROTEC_v1.0.apk">
+            📱 Descargar APK
+        </a>
+        <p class="app-version">Versión 1.0</p>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 AGROTEC - Tecnología al servicio del agricultor</p>
+            <div class="footer-links">
+                <a href="https://carlosvg777.github.io/politica-de-privacidad-Agrotec/" class="footer-link">Política de Privacidad</a>
+                <span class="separator">|</span>
+                <a href="https://instagram.com/carlos_vg74" target="_blank" class="footer-link" rel="noopener noreferrer">
+                    📱 @carlos_vg74
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleDetails(card) {
+            const wasActive = card.classList.contains('active');
+            
+            document.querySelectorAll('.feature-card').forEach(c => {
+                c.classList.remove('active');
+            });
+            
+            if (!wasActive) {
+                card.classList.add('active');
+            }
+        }
+
+        document.querySelector('a[href="#download"]').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#download').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    </script>
+</body>
+</html>
