@@ -18,24 +18,25 @@
         }
 
         .hero {
-            background: linear-gradient(135deg, #1a4d2e 0%, #2d6a4f 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+    background: url('agrotecfondo.jpg') center/cover no-repeat;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: moveGrid 20s linear infinite;
-        }
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(26, 77, 46, 0.7);
+    z-index: 0;
+}
 
         @keyframes moveGrid {
             0% { transform: translate(0, 0); }
@@ -395,7 +396,7 @@
     <section class="hero">
         <div class="hero-content">
             <div class="logo">
-                <img src="ic_agrotec_logo.png" alt="AGROTEC Logo">
+                <img src="ic_agrotec_logo2.png" alt="AGROTEC Logo">
             </div>
             <h1>AGROTEC</h1>
             <p class="slogan">Un puente entre el conocimiento técnico y experiencia del agricultor con la tecnología</p>
@@ -563,4 +564,5 @@
 </body>
 
 </html>
+
 
